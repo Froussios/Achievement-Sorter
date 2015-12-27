@@ -29,15 +29,17 @@ $("#terms").keyupAsObservable()
 	.throttle(200)
 	.distinctUntilChanged()
 	.subscribe(termstr => {
-		var terms = termstr.split(";").map(s => s.trim());
+		var orTerms = termstr.split(";").map(s => s.trim());
 		
 		// remove previous filter
 		all.removeClass("match");
 		all.addClass("excluded");
 		
 		// apply filtering
-		terms.forEach(term => {
-			var matches = $(".achieveRow:containsNC('" + term + "')");
+		orTerms.forEach(term => {
+			var andTerms = term.split("+").map(s => s.trim());
+			var condition = andTerms.reduce((a,t) => a + ":containsNC(" + t + ")", "");
+			var matches = $(".achieveRow" + condition);
 			matches.addClass("match");
 			matches.removeClass("excluded");
 		});
