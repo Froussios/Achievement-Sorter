@@ -1,0 +1,23 @@
+.filter_bar {
+	position: fixed;
+	height: 50px;
+	width: 400px;
+	top: 0px;
+	right: 0px;
+	background-color: purple;
+	z-index: 1000
+}
+
+.achieveRow.excluded {
+	visibility: collapse;
+	height: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	min-height: 0px;
+}
+
+.achieveRow.match {
+	visibility: visible;
+}

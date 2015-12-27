@@ -2,14 +2,44 @@
 // @match http://steamcommunity.com/profiles/*/stats/*?tab=achievements*
 // ==/UserScript==
 
-$("body").append('<div class="custom_filter"></div>');
-var bar = $(".custom_filter");
-bar.css("position", "fixed");
-bar.css("height", "50px");
-bar.css("width", "400px");
-bar.css("top", "0px");
-bar.css("right", "0px");
-bar.css("background-color", "red")
-bar.css("z-index", "1000")
+// Case-insensitive contains for jQuery
+$.extend($.expr[":"], {
+	"containsNC": function(elem, i, match, array) {
+		return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+	}
+});
 
-alert("hi1")
+// Add search controls
+$("body").append(
+	'<div class="filter_bar">' +
+		"<div class='version_holder'>" +
+			chrome.runtime.getManifest().version + 
+		"</div>" +
+		"<div>" +
+			"<input id='terms' class='search' type='text'/>" +
+		"</div>" +
+	'</div>'
+);
+
+var all = $(".achieveRow");
+
+// Respond to terms
+$("#terms").keyupAsObservable()
+	.map(_ => $("#terms").val())
+	.throttle(200)
+	.distinctUntilChanged()
+	.subscribe(termstr => {
+		var terms = termstr.split(";").map(s => s.trim());
+		
+		// remove previous filter
+		all.removeClass("match");
+		all.addClass("excluded");
+		
+		// apply filtering
+		terms.forEach(term => {
+			var matches = $(".achieveRow:containsNC('" + term + "')");
+			matches.addClass("match");
+			matches.removeClass("excluded");
+		});
+	});
+

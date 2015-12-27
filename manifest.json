@@ -12,9 +12,17 @@
   
   "content_scripts": [
     {
-      "matches": ["http://steamcommunity.com/profiles/*/stats/*?tab=achievements*"],
-      "css": ["styles.css"],
-      "js": ["jquery-2.1.4.min.js", "achie.user.js"]
+		"matches": ["http://steamcommunity.com/profiles/*/stats/*?tab=achievements*"],
+		"css": ["styles.css"],
+		"js": [
+			"jquery-2.1.4.min.js",
+			"rx.all.js",
+			"rx.jquery.min.js",
+			"achie.user.js"
+		]
     }
+  ],
+  
+  "web_accessible_resources": [
   ]
 }
