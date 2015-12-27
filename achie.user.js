@@ -26,7 +26,7 @@ var all = $(".achieveRow");
 // Respond to terms
 $("#terms").keyupAsObservable()
 	.map(_ => $("#terms").val())
-	.throttle(200)
+	.debounce(200)
 	.distinctUntilChanged()
 	.subscribe(termstr => {
 		var orTerms = termstr.split(";").map(s => s.trim());
