@@ -9,17 +9,15 @@ $.extend($.expr[":"], {
 	}
 });
 
-// Add search controls
-$("body").append(
-	'<div class="filter_bar">' +
-		"<div class='version_holder'>" +
-			chrome.runtime.getManifest().version + 
-		"</div>" +
-		"<div>" +
-			"<input id='terms' class='search' type='text'/>" +
-		"</div>" +
-	'</div>'
+var termsInput = $(
+	"<div id='searchContainer'>" +
+		"<input id='terms' class='search' type='text' placeholder='search terms'/>" +
+	"</div>"
 );
+
+$("#topSummaryBoxContent").append(termsInput);
+
+
 
 var all = $(".achieveRow");
 

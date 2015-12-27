@@ -21,3 +21,7 @@
 .achieveRow.match {
 	visibility: visible;
 }
+
+#searchContainer {
+	margin-right: 0px;
+}
