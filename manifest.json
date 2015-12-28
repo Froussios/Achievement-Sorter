@@ -12,7 +12,7 @@
   
   "content_scripts": [
     {
-		"matches": ["http://steamcommunity.com/profiles/*/stats/*?tab=achievements*"],
+		"matches": ["http://steamcommunity.com/profiles/*/stats/*"],
 		"css": ["styles.css"],
 		"js": [
 			"jquery-2.1.4.min.js",
