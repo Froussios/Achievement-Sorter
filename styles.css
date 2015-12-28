@@ -8,7 +8,8 @@
 	z-index: 1000
 }
 
-.achieveRow.excluded {
+.achieveRow.excluded,
+.achieveRow.hiddenUnlocked {
 	visibility: collapse;
 	height: 0px;
 	padding-top: 0px;
@@ -19,7 +20,6 @@
 }
 
 .achieveRow.match {
-	visibility: visible;
 }
 
 #searchContainer {

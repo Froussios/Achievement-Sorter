@@ -12,14 +12,14 @@ $.extend($.expr[":"], {
 var termsInput = $(
 	"<div id='searchContainer'>" +
 		"<input id='terms' class='search' type='text' placeholder='search terms'/>" +
+		"<input id='hideunlocked' type='checkbox'>hide unlocked</input>" +
 	"</div>"
 );
 
 $("#topSummaryBoxContent").append(termsInput);
 
-
-
 var all = $(".achieveRow");
+var unlocked = $(".achieveRow:contains('Unlocked')");
 
 // Respond to terms
 $("#terms").keyupAsObservable()
@@ -41,5 +41,15 @@ $("#terms").keyupAsObservable()
 			matches.addClass("match");
 			matches.removeClass("excluded");
 		});
+	});
+
+// Hide/unhide unlocked
+$("#hideunlocked").changeAsObservable()
+	.map(_ => $("#hideunlocked").prop("checked"))
+	.subscribe(checked => {
+		if (checked)
+			unlocked.addClass("hiddenUnlocked");
+		else
+			unlocked.removeClass("hiddenUnlocked");
 	});
 
