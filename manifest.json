@@ -16,7 +16,6 @@
 		"css": ["styles.css"],
 		"js": [
 			"jquery-2.1.4.min.js",
-			"rx.all.js",
 			"rx.all.min.js",
 			"rx.jquery.min.js",
 			"achie.user.js"
