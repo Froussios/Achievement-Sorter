@@ -21,7 +21,8 @@ var termsInput = $(
 $("#topSummaryBoxContent, #headerContent").append(termsInput);
 
 var all = $(".achieveRow");
-var unlocked = $(".achieveRow:contains('Unlocked'), .achieveRow.unlocked");
+var unlocked = $(".achieveRow:has(.achieveUnlockTime:contains('Unlocked'))," + 
+                 ".achieveRow.unlocked");
 
 // Respond to terms
 $("#terms").keyupAsObservable()
