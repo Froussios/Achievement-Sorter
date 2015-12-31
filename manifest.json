@@ -20,6 +20,16 @@
 			"rx.jquery.min.js",
 			"achievements.user.js"
 		]
+    },
+	{
+		"matches": ["http://steamcommunity.com/stats/*/achievements/*"],
+		"css": ["styles.css"],
+		"js": [
+			"jquery-2.1.4.min.js",
+			"rx.all.min.js",
+			"rx.jquery.min.js",
+			"achievements-global.user.js"
+		]
     }
   ],
   
