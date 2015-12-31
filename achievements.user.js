@@ -16,10 +16,10 @@ var termsInput = $(
 	"</div>"
 );
 
-$("#topSummaryBoxContent").append(termsInput);
+$("#topSummaryBoxContent, #headerContent").append(termsInput);
 
 var all = $(".achieveRow");
-var unlocked = $(".achieveRow:contains('Unlocked')");
+var unlocked = $(".achieveRow:contains('Unlocked'), .achieveRow.unlocked");
 
 // Respond to terms
 $("#terms").keyupAsObservable()
