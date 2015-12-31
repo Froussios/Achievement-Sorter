@@ -1,10 +1,13 @@
+.debug {
+	background-color: purple;
+}
+
 .filter_bar {
 	position: fixed;
 	height: 50px;
 	width: 400px;
 	top: 0px;
 	right: 0px;
-	background-color: purple;
 	z-index: 1000
 }
 
