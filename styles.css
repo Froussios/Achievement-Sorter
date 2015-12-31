@@ -12,26 +12,18 @@
 }
 
 .achieveRow.excluded,
-.achieveRow.hiddenUnlocked {
-	visibility: collapse;
-	height: 0px;
-	margin: 0px;
-	padding: 0px;
-	min-height: 0px;
-	min-width: 0px;
-	z-index: 0;
-}
-
 .achieveRow.excluded>div,
 .achieveRow.excluded>div>div,
 .achieveRow.excluded>div>div>div,
+.achieveRow.hiddenUnlocked,
 .achieveRow.hiddenUnlocked>div,
 .achieveRow.hiddenUnlocked>div>div,
 .achieveRow.hiddenUnlocked>div>div>div {
     visibility: collapse;
     height: 0px;
     width: 0px;
-    min-height: 0px;
+	min-height: 0px;
+	min-width: 0px;
 	margin: 0px;
 	padding: 0px;
 	z-index: 0;

@@ -1,5 +1,6 @@
 // ==UserScript==
 // @match http://steamcommunity.com/profiles/*/stats/*?tab=achievements*
+// @author Froussios
 // ==/UserScript==
 
 // Case-insensitive contains for jQuery
@@ -9,13 +10,14 @@ $.extend($.expr[":"], {
 	}
 });
 
+// Controls
 var termsInput = $(
 	"<div id='searchContainer'>" +
 		"<input id='terms' class='search' type='text' placeholder='search terms'/>" +
 		"<input id='hideunlocked' type='checkbox'>hide unlocked</input>" +
 	"</div>"
 );
-
+// Inject controls into webpage
 $("#topSummaryBoxContent, #headerContent").append(termsInput);
 
 var all = $(".achieveRow");
