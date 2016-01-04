@@ -2,9 +2,13 @@
   "manifest_version": 2,
   
   "name": "Steam Achievement Tools",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Filter achievements on Steam's website",
   "author": "Froussios",
+  
+  "icons": {
+    "128": "icons/icon_128.png"
+  },
   
   "content_scripts": [
     {
