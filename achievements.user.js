@@ -34,7 +34,7 @@ $("#terms").keyupAsObservable()
 		all.removeClass("match");
 		all.addClass("excluded");
 		// apply filtering
-		var orTerms = termstr.split(";").map(s => s.trim());
+		var orTerms = termstr.split(";").map(s => s.trim()).filter(s => s.length!=0);
 		orTerms.forEach(term => {
 			var andTerms = term.split("+").map(s => s.trim());
 			var condition = andTerms.reduce((a,t) => a + ":containsNC(" + t + ")", "");
