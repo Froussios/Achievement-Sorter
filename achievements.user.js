@@ -30,13 +30,11 @@ $("#terms").keyupAsObservable()
 	.debounce(200)
 	.distinctUntilChanged()
 	.subscribe(termstr => {
-		var orTerms = termstr.split(";").map(s => s.trim());
-		
 		// remove previous filter
 		all.removeClass("match");
 		all.addClass("excluded");
-		
 		// apply filtering
+		var orTerms = termstr.split(";").map(s => s.trim());
 		orTerms.forEach(term => {
 			var andTerms = term.split("+").map(s => s.trim());
 			var condition = andTerms.reduce((a,t) => a + ":containsNC(" + t + ")", "");
