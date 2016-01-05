@@ -54,3 +54,30 @@ $("#hideunlocked").changeAsObservable()
 			unlocked.removeClass("hiddenUnlocked");
 	});
 
+function insertionsort(items, comparator) {
+	for (var i=0 ; i<items.length ; i++) {
+		for (var j=i+1 ; j<items.length ; j++) {
+			if (comparator(items[i], items[j]) < 0) {
+				// put j before i
+				$(items[i]).before($(items[j]));
+				// modifiy array accordingly
+				items.splice(i, 0, items[j]);
+				items.splice(j+1, 1);
+			}
+		}
+	}
+}
+
+function getDate(item) {
+	return $(item).find(".achieveUnlockTime").text().trim('"');
+}
+
+// TODO better than lexicographical
+function compare(item1, item2) {
+	if (getDate(item1) < getDate(item2))
+		return -1;
+	if (getDate(item1) > getDate(item2))
+		return 1;
+	return 0;
+}
+
