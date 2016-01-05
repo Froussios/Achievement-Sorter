@@ -13,8 +13,9 @@ $.extend($.expr[":"], {
 // Controls
 var termsInput = $(
 	"<div id='searchContainer'>" +
-		"<input id='terms' class='search' type='text' placeholder='search terms'/>" +
-		"<input id='hideunlocked' type='checkbox'>hide unlocked</input>" +
+		"<input id='terms' class='search' type='text' placeholder='search terms'/> " +
+		"<input id='hideunlocked' type='checkbox'>hide unlocked</input> " +
+		"<button id='sortbydate' type'button'>Sort by date</button> " +
 	"</div>"
 );
 // Inject controls into webpage
@@ -54,6 +55,13 @@ $("#hideunlocked").changeAsObservable()
 			unlocked.removeClass("hiddenUnlocked");
 	});
 
+$("#sortbydate").clickAsObservable()
+	.subscribe(_ => {
+		insertionsort(unlocked.toArray(), compare);
+		unlocked = $(".achieveRow:has(.achieveUnlockTime:contains('Unlocked'))," + 
+                 ".achieveRow.unlocked");
+	});
+
 function insertionsort(items, comparator) {
 	for (var i=0 ; i<items.length ; i++) {
 		for (var j=i+1 ; j<items.length ; j++) {
@@ -74,10 +82,76 @@ function getDate(item) {
 
 // TODO better than lexicographical
 function compare(item1, item2) {
-	if (getDate(item1) < getDate(item2))
-		return -1;
-	if (getDate(item1) > getDate(item2))
-		return 1;
+	var date1 = getDate(item1);
+	var date2 = getDate(item2);
+	
+	var v1 = date1.split(" ");
+	var v2 = date2.split(" ");
+	if (v1.length != v2.length)
+		return v2.length - v1.length;
+	
+	v1 = order(date1);
+	v2 = order(date2);
+	for (var i=0 ; i<v1.length ; i++) {
+		if (v1 < v2)
+			return -1;
+		if (v1 > v2)
+			return 1;
+	}
 	return 0;
+}
+
+var months = {
+	1: "Jan",
+	2: "Feb",
+	3: "Mar",
+	4: "Apr",
+	5: "May",
+	6: "Jun",
+	7: "Jul",
+	8: "Aug",
+	9: "Sep",
+	10: "Oct",
+	11: "Nov",
+	12: "Dec",
+	
+	"Jan": 1,
+	"Feb": 2,
+	"Mar": 3,
+	"Apr": 4,
+	"May": 5,
+	"Jun": 6,
+	"Jul": 7,
+	"Aug": 8,
+	"Sep": 9,
+	"Oct": 10,
+	"Nov": 11,
+	"Dec": 12
+}
+
+function order(date) {
+	var day = /\d\d/i.exec(date);
+	var time = /\d+:\d\d/i.exec(date);
+	var month = /\w\w\w,/i.exec(date);
+	var year = /\d\d\d\d/i.exec(date);
+	var now = new Date();
+	return [
+		year != null  ? year[0] 
+		              : now.getYear(),
+		month != null ? months[month[0]] 
+		              : months[now.getMonth()+1],
+		day != null   ? day[0] 
+		              : now.getDate(),
+		time != null  ? time[0] 
+		              : "" + now.getHours() + ":" + now.getMinutes(),
+	];
+}
+
+function rearrange(items, indices) {
+	var rv = Array();
+	for (var i=0 ; i<indices.length ; i++) {
+		rv[i] = items[indices[i]];
+	}
+	return rv;
 }
 
