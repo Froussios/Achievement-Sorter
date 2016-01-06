@@ -31,18 +31,25 @@ $("#terms").keyupAsObservable()
 	.debounce(200)
 	.distinctUntilChanged()
 	.subscribe(termstr => {
-		// remove previous filter
-		all.removeClass("match");
-		all.addClass("excluded");
-		// apply filtering
-		var orTerms = termstr.split(";").map(s => s.trim()).filter(s => s.length!=0);
-		orTerms.forEach(term => {
-			var andTerms = term.split("+").map(s => s.trim());
-			var condition = andTerms.reduce((a,t) => a + ":containsNC(" + t + ")", "");
-			var matches = $(".achieveRow" + condition);
-			matches.addClass("match");
-			matches.removeClass("excluded");
-		});
+		if (termstr.length == 0) {
+			// Clear all filtering
+			all.removeClass("match");
+			all.removeClass("excluded");
+		}
+		else {
+			// remove previous filter
+			all.removeClass("match");
+			all.addClass("excluded");
+			// apply new filter
+			var orTerms = termstr.split(";").map(s => s.trim()).filter(s => s.length!=0);
+			orTerms.forEach(term => {
+				var andTerms = term.split("+").map(s => s.trim());
+				var condition = andTerms.reduce((a,t) => a + ":containsNC(" + t + ")", "");
+				var matches = $(".achieveRow" + condition);
+				matches.addClass("match");
+				matches.removeClass("excluded");
+			});
+		}
 	});
 
 // Hide/unhide unlocked
