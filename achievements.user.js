@@ -31,7 +31,7 @@ $("#terms").keyupAsObservable()
 	.debounce(200)
 	.distinctUntilChanged()
 	.subscribe(termstr => {
-		if (termstr.length == 0) {
+		if (termstr.length === 0) {
 			// Clear all filtering
 			all.removeClass("match");
 			all.removeClass("excluded");
@@ -41,7 +41,7 @@ $("#terms").keyupAsObservable()
 			all.removeClass("match");
 			all.addClass("excluded");
 			// apply new filter
-			var orTerms = termstr.split(";").map(s => s.trim()).filter(s => s.length!=0);
+			var orTerms = termstr.split(";").map(s => s.trim()).filter(s => s.length!==0);
 			orTerms.forEach(term => {
 				var andTerms = term.split("+").map(s => s.trim());
 				var condition = andTerms.reduce((a,t) => a + ":containsNC(" + t + ")", "");
@@ -88,7 +88,6 @@ function getDate(item) {
 	return $(item).find(".achieveUnlockTime").text().trim('"');
 }
 
-// TODO better than lexicographical
 function compare(item1, item2) {
 	var date1 = getDate(item1);
 	var date2 = getDate(item2);
@@ -135,7 +134,7 @@ var months = {
 	"Oct": 10,
 	"Nov": 11,
 	"Dec": 12
-}
+};
 
 function order(date) {
 	var day = /\d\d/i.exec(date);
@@ -144,14 +143,14 @@ function order(date) {
 	var year = /\d\d\d\d/i.exec(date);
 	var now = new Date();
 	return [
-		year != null  ? year[0] 
-		              : now.getYear(),
-		month != null ? months[month[0]] 
-		              : months[now.getMonth()+1],
-		day != null   ? day[0] 
-		              : now.getDate(),
-		time != null  ? time[0] 
-		              : "" + now.getHours() + ":" + now.getMinutes(),
+		year !== null  ? year[0] 
+		               : now.getYear(),
+		month !== null ? months[month[0]] 
+		               : months[now.getMonth()+1],
+		day !== null   ? day[0] 
+		               : now.getDate(),
+		time !== null  ? time[0] 
+		               : "" + now.getHours() + ":" + now.getMinutes(),
 	];
 }
 
