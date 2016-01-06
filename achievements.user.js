@@ -63,6 +63,7 @@ $("#hideunlocked").changeAsObservable()
 	});
 
 $("#sortbydate").clickAsObservable()
+  .take(1) // cannot unsort
 	.subscribe(_ => {
 		insertionsort(unlocked.toArray(), compare);
 		unlocked = $(".achieveRow:has(.achieveUnlockTime:contains('Unlocked'))," + 
