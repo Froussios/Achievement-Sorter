@@ -21,6 +21,7 @@ var termsInput = $(
 // Inject controls into webpage
 $("#topSummaryBoxContent, #headerContent").append(termsInput);
 
+// Find achievement cards
 var all = $(".achieveRow");
 var unlocked = $(".achieveRow:has(.achieveUnlockTime:contains('Unlocked'))," + 
                  ".achieveRow.unlocked");
